@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -22,12 +23,19 @@ public class Assessment {
     @NotNull(message = "owner is mandatory")
     private User owner;
 
-    @NotNull(message = "status is mandatory")
-    private AssessmentStatusEnum status;
-
-    public Assessment(List<Concept> concepts, User owner, AssessmentStatusEnum status) {
+    public Assessment(List<Concept> concepts, User owner) {
         this.concepts = concepts;
         this.owner = owner;
-        this.status = status;
+    }
+
+    public AssessmentStatusEnum getStatus() {
+        var done = concepts.stream().filter(x -> x.getGrade().getValue() > 0).collect(Collectors.toList());
+
+        if(done.isEmpty())
+            return AssessmentStatusEnum.TO_DO;
+        else if(done.size() == concepts.size())
+            return AssessmentStatusEnum.DONE;
+        else
+            return AssessmentStatusEnum.DOING;
     }
 }

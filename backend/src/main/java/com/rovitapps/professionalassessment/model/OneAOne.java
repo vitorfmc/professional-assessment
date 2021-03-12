@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,9 +21,9 @@ public class OneAOne {
     @NotNull(message = "date is mandatory")
     private Date date;
 
-    private List<String> actions = new ArrayList<>();
+    private String actions;
 
-    private List<String> comments = new ArrayList<>();
+    private String comments;
 
     @NotNull(message = "creatorAssessments is mandatory")
     private Assessment creatorAssessments;
@@ -33,10 +31,22 @@ public class OneAOne {
     @NotNull(message = "evaluatedAssessments is mandatory")
     private Assessment evaluatedAssessments;
 
+    private boolean enabled = true;
 
     public OneAOne(Date date, Assessment creatorAssessments, Assessment evaluatedAssessments) {
         this.date = date;
         this.creatorAssessments = creatorAssessments;
         this.evaluatedAssessments = evaluatedAssessments;
+    }
+
+    public String getStatus(){
+        if(enabled = false){
+            return "Encerrado";
+        }else if(!creatorAssessments.getStatus().equals(AssessmentStatusEnum.DONE)
+                || (evaluatedAssessments != null && !creatorAssessments.getStatus().equals(AssessmentStatusEnum.DONE))){
+            return "Formulários sendo preenchidos";
+        }else{
+            return "Formulários preenchidos";
+        }
     }
 }

@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,8 +44,8 @@ public class OneAOneService {
 
         validate(creator, evaluated, assessmentTemplate, concepts, oneAOneDate);
 
-        var creatorAssessment = new Assessment(concepts, creator, AssessmentStatusEnum.TO_DO);
-        var evaluatedAssessment = evaluated != null ? new Assessment(concepts, evaluated, AssessmentStatusEnum.TO_DO) : null;
+        var creatorAssessment = new Assessment(concepts, creator);
+        var evaluatedAssessment = evaluated != null ? new Assessment(concepts, evaluated) : null;
 
         var oneAOne = new OneAOne(oneAOneDate, creatorAssessment, evaluatedAssessment);
 
@@ -104,6 +101,14 @@ public class OneAOneService {
         return repository.findAll();
     }
 
+    public List<OneAOne> findAllByUsers(String creator, String evaluated) {
+
+        if(evaluated == null)
+            return null;
+
+        return repository.findAllByUsers(creator, evaluated);
+    }
+
     public void delete(String id) throws DataValidationException {
 
         List<String> messages = new ArrayList<>();
@@ -120,5 +125,53 @@ public class OneAOneService {
         if(!messages.isEmpty()){
             throw new DataValidationException(messages);
         }
+    }
+
+    public OneAOne find(String id) throws DataValidationException {
+
+        if(id == null)
+            throw new DataValidationException(Arrays.asList(messageSource.getMessage("oneaone.error.id.mandatory", null, Locale.getDefault())));
+
+        var op = repository.findById(id);
+
+        return op.isPresent() ? op.get() : null;
+    }
+
+    public OneAOne update(String id, Date date, String comments, String actions) throws DataValidationException {
+
+        var oneAOne = find(id);
+
+        if(oneAOne == null)
+            throw new DataValidationException(Arrays.asList(messageSource.getMessage("oneaone.error.entity.not.found", null, Locale.getDefault())));
+
+        if(date == null){
+            throw new DataValidationException(Arrays.asList(messageSource.getMessage("oneaone.error.date.null", null, Locale.getDefault())));
+        }else if(date.before(new Date())){
+            throw new DataValidationException(Arrays.asList(messageSource.getMessage("oneaone.error.date.past", null, Locale.getDefault())));
+        }
+
+        oneAOne.setDate(date);
+        oneAOne.setComments(comments);
+        oneAOne.setActions(actions);
+
+        oneAOne.setEnabled(false);
+
+        return repository.save(oneAOne);
+    }
+
+    public OneAOne close(String id) throws DataValidationException {
+
+        var oneAOne = find(id);
+
+        if(oneAOne == null)
+            throw new DataValidationException(Arrays.asList(messageSource.getMessage("oneaone.error.entity.not.found", null, Locale.getDefault())));
+
+        oneAOne.setEnabled(false);
+
+        return repository.save(oneAOne);
+    }
+
+    public OneAOne save(OneAOne oneAOne) {
+        return repository.save(oneAOne);
     }
 }

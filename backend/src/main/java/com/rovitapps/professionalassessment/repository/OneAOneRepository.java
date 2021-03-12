@@ -16,4 +16,7 @@ public interface OneAOneRepository extends MongoRepository<OneAOne, String> {
             "date: '?2'}")
     List<OneAOne> findDuplicate(String creatorUsername, String evaluatedUserName, Date date);
 
+    @Query("{'creatorAssessments.owner.username':'?0', " +
+            "'evaluatedAssessments.owner.username':'?1'")
+    List<OneAOne> findAllByUsers(String creatorUsername, String evaluatedUserName);
 }
