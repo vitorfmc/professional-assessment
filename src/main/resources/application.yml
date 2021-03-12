@@ -1,0 +1,12 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+    com.rovitapps.professionalassessment: INFO
+
+spring.data.mongodb.uri: mongodb://localhost:27017/professional_assessment
