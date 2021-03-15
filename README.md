@@ -55,3 +55,21 @@ Essa aplicação visa prover uma forma de acompanhar o crescimento profissional 
 ```
 $ gradle bootRun
 ```
+
+### 6. Swagger
+
+1. UI
+
+    http://localhost:8080/swagger-ui/index.html#/
+
+2. Links uteis
+
+    https://springfox.github.io/springfox/docs/current/#springfox-spring-mvc-and-spring-boot
+
+    https://medium.com/@hala3k/setting-up-swagger-3-with-spring-boot-2-a7c1c3151545
+
+    http://localhost:8080/swagger-resources/configuration/ui
+
+    http://localhost:8080/swagger-resources
+
+    http://localhost:8080/v3/api-docs
