@@ -1,0 +1,17 @@
+version: "2"
+services:
+  front:
+    image: node:12.13-alpine
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: >
+      sh -c "yarn 
+      && yarn build_homolog
+      && cd dist/ 
+      && tar -zcvf ../dist_homolog.tar.gz * 
+      && cd .."
+
+
+######## comandos uteis
+# docker run -it --rm -v "$(pwd)":/app:rw -w /app node:12.13-alpine sh

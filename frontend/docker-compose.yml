@@ -1,0 +1,21 @@
+version: "3"
+services:
+  front:
+    image: node:12.13-alpine
+    ports:
+      - '8081:8080'
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: >
+      sh -c "yarn 
+      && yarn serve"
+
+
+######## OBS
+# Por algum motivo (bruxaria?) na primeira vez que sobe o compose, nenhum log 
+# do yarn depois da linha "front_1  | [4/4] Building fresh packages..." sai no terminal...
+# nas vezes seguintes ele loga normalmente.
+
+######## comandos uteis
+# docker run -it --rm -v "$(pwd)":/app:rw -w /app node:12.13-alpine sh
