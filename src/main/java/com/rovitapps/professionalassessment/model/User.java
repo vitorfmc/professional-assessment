@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -27,11 +28,25 @@ public class User {
     @NotNull(message = "password is mandatory")
     private String password;
 
-    public User(@NotNull(message = "name is mandatory") String name, @NotNull(message = "username is mandatory") String username,
-                @NotNull(message = "email is mandatory") String email, @NotNull(message = "password is mandatory") String password) {
+    private List<Role> roles;
+
+    public User(String name, String username, String email, String password, List<Role> roles) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.roles = roles;
+    }
+
+    public String getRolesFromProfiles() {
+
+        String rolesFromProfiles = "";
+
+        for (Role role : getRoles()) {
+            rolesFromProfiles += role.getName() + ", ";
+        }
+
+        return rolesFromProfiles.substring(0, rolesFromProfiles.lastIndexOf(","));
+
     }
 }

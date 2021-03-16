@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,6 +32,7 @@ public class AssessmentResource {
     @Autowired
     private AssessmentService service;
 
+    @PreAuthorize("hasRole('ASSESSMENT_LIST')")
     @GetMapping(value = "/{oneAOneId}/{username}")
     public ResponseEntity findOne(@PathVariable("oneAOneId") String oneAOneId, @PathVariable("username") String username){
         String requestId = Utils.getUuid();
@@ -62,6 +64,7 @@ public class AssessmentResource {
         }
     }
 
+    @PreAuthorize("hasRole('ASSESSMENT_FIND_ONE')")
     @PutMapping(value = "/{oneAOneId}/{username}")
     public ResponseEntity update(@PathVariable("oneAOneId") String oneAOneId, @PathVariable("username") String username,
                                  @Valid @RequestBody AssessmentUpdateDTO dto){

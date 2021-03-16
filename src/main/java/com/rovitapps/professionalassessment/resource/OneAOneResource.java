@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,14 +36,16 @@ public class OneAOneResource {
     @Autowired
     private OneAOneService service;
 
+    @PreAuthorize("hasRole('ONEAONE_LIST')")
     @GetMapping
-    public ResponseEntity findAll(){
+    public ResponseEntity findAll(@RequestParam(required = false, defaultValue = "10") int limit,
+                                  @RequestParam(required = false, defaultValue = "0") int offset){
         String requestId = Utils.getUuid();
 
         try{
             LOGGER.info("[OneAOneResource.findAll][" + requestId + "] Started");
 
-            var response = service.findAllByUser("x");
+            var response = service.findAllByUser(getLoggedUsername(), limit, offset);
 
             LOGGER.info("[OneAOneResource.findAll][" + requestId + "] Ended");
 
@@ -59,6 +64,7 @@ public class OneAOneResource {
         }
     }
 
+    @PreAuthorize("hasRole('ONEAONE_FIND_ONE')")
     @GetMapping(value = "/{id}")
     public ResponseEntity findOne(@PathVariable("id") String id){
         String requestId = Utils.getUuid();
@@ -87,6 +93,7 @@ public class OneAOneResource {
         }
     }
 
+    @PreAuthorize("hasRole('ONEAONE_CREATE')")
     @PostMapping
     public ResponseEntity create(@Valid @RequestBody OneAOneCreateDTO dto) {
         String requestId = Utils.getUuid();
@@ -122,6 +129,7 @@ public class OneAOneResource {
 
     }
 
+    @PreAuthorize("hasRole('ONEAONE_UPDATE')")
     @PutMapping(value = "/{id}")
     public ResponseEntity update(@PathVariable("id") String id, @Valid @RequestBody OneAOneUpdateDTO dto){
         String requestId = Utils.getUuid();
@@ -155,6 +163,7 @@ public class OneAOneResource {
         }
     }
 
+    @PreAuthorize("hasRole('ONEAONE_UPDATE')")
     @PutMapping(value = "/close/{id}")
     public ResponseEntity close(@PathVariable("id") String id){
         String requestId = Utils.getUuid();
@@ -186,6 +195,7 @@ public class OneAOneResource {
         }
     }
 
+    @PreAuthorize("hasRole('ONEAONE_DELETE')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity delete(@PathVariable("id") String id){
         String requestId = Utils.getUuid();
@@ -210,6 +220,11 @@ public class OneAOneResource {
                             Arrays.asList(messageSource.getMessage("generic.error", null,
                                     Locale.getDefault())), null, requestId));
         }
+    }
+
+    private String getLoggedUsername(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ((UserDetails)principal).getUsername();
     }
 
 }

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -40,8 +41,8 @@ public class Bootstrap implements ApplicationRunner {
             createGradeTypes();
             createAssessmentTemplates();
 
-            createUser("y", "y", "y@y.com");
-            createUser("x", "x", "x@x.com");
+            createUser("user1", "User 1", "y@y.com");
+            createUser("user2", "User 1", "x@x.com");
 
         }catch (Exception e){
             LOGGER.error("[Bootstrap.run] Error: " + e.getMessage(), e);
@@ -52,7 +53,19 @@ public class Bootstrap implements ApplicationRunner {
 
     private void createUser(String username, String name, String email){
         if(userRepository.findByUsername(username) == null){
-            userRepository.save(new User(name, username, email, ""));
+            userRepository.save(new User(name, username, email, (new BCryptPasswordEncoder()).encode(username),
+                    Arrays.asList(
+                        new Role("ONEAONE_LIST"),
+                        new Role("ONEAONE_FIND_ONE"),
+                        new Role("ONEAONE_CREATE"),
+                        new Role("ONEAONE_UPDATE"),
+                        new Role("ONEAONE_DELETE"),
+                        new Role("USER_LIST"),
+                        new Role("ASSESSMENT_TEMPLATE_LIST"),
+                        new Role("ASSESSMENT_LIST"),
+                        new Role("ASSESSMENT_FIND_ONE")
+
+            )));
             LOGGER.info("[Bootstrap.run] Info: User " + name + " created.");
         }
     }

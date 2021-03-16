@@ -101,12 +101,9 @@ public class OneAOneService {
 
     }
 
-    public OneAOneListDto findAllByUser(String username) {
-
-        List<OneAOneListDto> response = new ArrayList<>();
+    public OneAOneListDto findAllByUser(String username, int limit, int offset) {
         var resp = repository.findAllByApplicantUserOrGuestUser(username, username);
-
-        return new OneAOneListDto();
+        return new OneAOneListDto(resp, 0, 0, 0, resp.size(), resp.size(), 1);
     }
 
     public List<OneAOne> findAllByUsers(String creator, String evaluated) {

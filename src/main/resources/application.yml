@@ -10,3 +10,8 @@ logging:
     com.rovitapps.professionalassessment: INFO
 
 spring.data.mongodb.uri: mongodb://localhost:27017/professional_assessment
+
+security:
+  oauth2:
+    authorization:
+      tokenTimeout: 600
