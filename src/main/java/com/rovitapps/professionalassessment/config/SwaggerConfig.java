@@ -1,4 +1,4 @@
-package com.rovitapps.professionalassessment;
+package com.rovitapps.professionalassessment.config;
 
 import org.springframework.context.annotation.Configuration;
 
