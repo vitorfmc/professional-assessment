@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
+@PreAuthorize("#oauth2.hasScope('webservice-read')")
 @RestController
 @RequestMapping(value = "/api/v1/assessmentTemplate")
 @CrossOrigin
@@ -32,7 +33,6 @@ public class AssessmentTemplateResource {
     @Autowired
     private AssessmentTemplateService service;
 
-    @PreAuthorize("hasRole('ASSESSMENT_TEMPLATE_LIST')")
     @GetMapping
     public ResponseEntity findAll(){
         String requestId = Utils.getUuid();

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
+@PreAuthorize("#oauth2.hasScope('webservice-read')")
 @RestController
 @RequestMapping(value = "/api/v1/user")
 @CrossOrigin
@@ -32,7 +33,6 @@ public class UserResource {
     @Autowired
     private UserService service;
 
-    @PreAuthorize("hasRole('USER_LIST')")
     @GetMapping
     public ResponseEntity findAll(){
         String requestId = Utils.getUuid();

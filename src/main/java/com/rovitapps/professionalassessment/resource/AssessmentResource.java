@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
+@PreAuthorize("#oauth2.hasScope('webservice-read')")
 @RestController
 @RequestMapping(value = "/api/v1/assessment")
 @CrossOrigin
@@ -32,7 +33,6 @@ public class AssessmentResource {
     @Autowired
     private AssessmentService service;
 
-    @PreAuthorize("hasRole('ASSESSMENT_LIST')")
     @GetMapping(value = "/{oneAOneId}/{username}")
     public ResponseEntity findOne(@PathVariable("oneAOneId") String oneAOneId, @PathVariable("username") String username){
         String requestId = Utils.getUuid();
@@ -64,7 +64,6 @@ public class AssessmentResource {
         }
     }
 
-    @PreAuthorize("hasRole('ASSESSMENT_FIND_ONE')")
     @PutMapping(value = "/{oneAOneId}/{username}")
     public ResponseEntity update(@PathVariable("oneAOneId") String oneAOneId, @PathVariable("username") String username,
                                  @Valid @RequestBody AssessmentUpdateDTO dto){

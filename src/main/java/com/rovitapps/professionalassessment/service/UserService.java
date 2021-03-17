@@ -42,7 +42,7 @@ public class UserService  implements ClientDetailsService {
             clientDetails = new BaseClientDetails();
             clientDetails.setClientId(user.getUsername());
             clientDetails.setClientSecret(user.getPassword());
-            clientDetails.setResourceIds(Arrays.asList("front-app"));
+            clientDetails.setResourceIds(Arrays.asList("professional-assessment-api"));
             clientDetails.setScope(Arrays.asList("webservice-read"));
             clientDetails.setAuthorizedGrantTypes(Arrays.asList("client_credentials"));
 

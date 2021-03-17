@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
+@PreAuthorize("#oauth2.hasScope('webservice-read')")
 @RestController
 @RequestMapping(value = "/api/v1/oneaone")
 @CrossOrigin
@@ -36,7 +37,6 @@ public class OneAOneResource {
     @Autowired
     private OneAOneService service;
 
-    @PreAuthorize("hasRole('ONEAONE_LIST')")
     @GetMapping
     public ResponseEntity findAll(@RequestParam(required = false, defaultValue = "10") int limit,
                                   @RequestParam(required = false, defaultValue = "0") int offset){
@@ -64,7 +64,6 @@ public class OneAOneResource {
         }
     }
 
-    @PreAuthorize("hasRole('ONEAONE_FIND_ONE')")
     @GetMapping(value = "/{id}")
     public ResponseEntity findOne(@PathVariable("id") String id){
         String requestId = Utils.getUuid();
@@ -93,7 +92,6 @@ public class OneAOneResource {
         }
     }
 
-    @PreAuthorize("hasRole('ONEAONE_CREATE')")
     @PostMapping
     public ResponseEntity create(@Valid @RequestBody OneAOneCreateDTO dto) {
         String requestId = Utils.getUuid();
@@ -129,7 +127,6 @@ public class OneAOneResource {
 
     }
 
-    @PreAuthorize("hasRole('ONEAONE_UPDATE')")
     @PutMapping(value = "/{id}")
     public ResponseEntity update(@PathVariable("id") String id, @Valid @RequestBody OneAOneUpdateDTO dto){
         String requestId = Utils.getUuid();
@@ -163,7 +160,6 @@ public class OneAOneResource {
         }
     }
 
-    @PreAuthorize("hasRole('ONEAONE_UPDATE')")
     @PutMapping(value = "/close/{id}")
     public ResponseEntity close(@PathVariable("id") String id){
         String requestId = Utils.getUuid();
@@ -195,7 +191,6 @@ public class OneAOneResource {
         }
     }
 
-    @PreAuthorize("hasRole('ONEAONE_DELETE')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity delete(@PathVariable("id") String id){
         String requestId = Utils.getUuid();
