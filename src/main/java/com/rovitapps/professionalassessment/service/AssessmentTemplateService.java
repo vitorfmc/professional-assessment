@@ -19,4 +19,8 @@ public class AssessmentTemplateService {
         return repository.findByName(name);
     }
 
+    public AssessmentTemplate findById(String id) {
+        var resp = repository.findById(id);
+        return resp.isPresent() ? resp.get() : null;
+    }
 }

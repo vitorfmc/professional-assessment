@@ -1,4 +1,4 @@
-package com.rovitapps.professionalassessment.resource;
+package com.rovitapps.professionalassessment.controller;
 
 import com.rovitapps.professionalassessment.dto.GenericResponseDto;
 import com.rovitapps.professionalassessment.service.UserService;
@@ -23,9 +23,9 @@ import java.util.Locale;
 @RestController
 @RequestMapping(value = "/api/v1/user")
 @CrossOrigin
-public class UserResource {
+public class UserRestController {
 
-    private static final Logger LOGGER = LogManager.getLogger(UserResource.class);
+    private static final Logger LOGGER = LogManager.getLogger(UserRestController.class);
 
     @Autowired
     protected MessageSource messageSource;
@@ -38,18 +38,18 @@ public class UserResource {
         String requestId = Utils.getUuid();
 
         try{
-            LOGGER.info("[UserResource.findAll][" + requestId + "] Started");
+            LOGGER.info("[UserRestController.findAll][" + requestId + "] Started");
 
             var response = service.findAll();
 
-            LOGGER.info("[UserResource.findAll][" + requestId + "] Ended");
+            LOGGER.info("[UserRestController.findAll][" + requestId + "] Ended");
 
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new GenericResponseDto(HttpStatus.OK.value(), new ArrayList<>(), response, requestId));
 
         }catch (Exception e){
-            LOGGER.error("[UserResource.findAll][" + requestId + "] Error: " + e.getMessage(), e);
+            LOGGER.error("[UserRestController.findAll][" + requestId + "] Error: " + e.getMessage(), e);
 
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)

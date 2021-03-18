@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,12 +16,16 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class Assessment {
 
+    @NotNull(message = "code is mandatory")
+    private String id;
+
     @JsonFormat(pattern="dd/MM/yyyy")
     private Date updateDate;
 
     private List<Concept> concepts;
 
     public Assessment(List<Concept> concepts) {
+        id = (new ObjectId()).toHexString();
         this.concepts = concepts;
     }
 

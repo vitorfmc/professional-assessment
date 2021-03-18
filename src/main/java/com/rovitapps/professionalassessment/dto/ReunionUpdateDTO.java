@@ -10,19 +10,15 @@ import javax.validation.constraints.Pattern;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OneAOneCreateDTO {
+public class ReunionUpdateDTO {
 
-    @NotNull(message = "creatorUsername is mandatory")
-    String creatorUsername;
+    String comments;
 
-    @NotNull(message = "evaluatedUsername is mandatory")
-    String evaluatedUsername;
-
-    @NotNull(message = "assessmentTemplateId is mandatory")
-    String assessmentTemplateId;
+    String actions;
 
     @NotNull(message = "oneAOneDate is mandatory")
     @Pattern(regexp = "^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|((1)[0-2]))(\\/)\\d{4}$",
             message="oneAOneDate format should be dd/mm/yyyy")
-    String oneAOneDate;
+    String date;
+
 }

@@ -1,4 +1,4 @@
-package com.rovitapps.professionalassessment.resource;
+package com.rovitapps.professionalassessment.controller;
 
 import com.rovitapps.professionalassessment.dto.GenericResponseDto;
 import com.rovitapps.professionalassessment.service.AssessmentTemplateService;
@@ -23,9 +23,9 @@ import java.util.Locale;
 @RestController
 @RequestMapping(value = "/api/v1/assessmentTemplate")
 @CrossOrigin
-public class AssessmentTemplateResource {
+public class AssessmentTemplateRestController {
 
-    private static final Logger LOGGER = LogManager.getLogger(AssessmentTemplateResource.class);
+    private static final Logger LOGGER = LogManager.getLogger(AssessmentTemplateRestController.class);
 
     @Autowired
     protected MessageSource messageSource;
@@ -38,18 +38,18 @@ public class AssessmentTemplateResource {
         String requestId = Utils.getUuid();
 
         try{
-            LOGGER.info("[AssessmentTemplateResource.findAll][" + requestId + "] Started");
+            LOGGER.info("[AssessmentTemplateRestController.findAll][" + requestId + "] Started");
 
             var response = service.findAll();
 
-            LOGGER.info("[AssessmentTemplateResource.findAll][" + requestId + "] Ended");
+            LOGGER.info("[AssessmentTemplateRestController.findAll][" + requestId + "] Ended");
 
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(new GenericResponseDto(HttpStatus.OK.value(), new ArrayList<>(), response, requestId));
 
         }catch (Exception e){
-            LOGGER.error("[AssessmentTemplateResource.findAll][" + requestId + "] Error: " + e.getMessage(), e);
+            LOGGER.error("[AssessmentTemplateRestController.findAll][" + requestId + "] Error: " + e.getMessage(), e);
 
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
