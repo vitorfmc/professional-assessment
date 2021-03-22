@@ -27,12 +27,9 @@
       <template v-slot:no-results>
           Nenhum resultado encontrado.
       </template>
-      <template v-slot:item.statusDescription="{ item }">
-        <v-chip :color="getColor(item.statusDescription)" dark>{{ item.statusDescription }}</v-chip>
-      </template>
-      <template v-slot:item.description="{ item }">
-        <v-btn text color="primary" @click="edit(item.code)">
-          {{ item.description }}  
+      <template v-slot:item.id="{ item }">
+        <v-btn text color="primary" @click="edit(item.id)">
+          {{ item.id }}
         </v-btn> 
       </template>
      
@@ -67,16 +64,12 @@ export default {
     page: 1,
     headers: [
       { text: 'Id', align: 'start', value: 'id' },
-      { text: 'Criado', align: 'start', value: 'creatorAssessments.' },
-      { text: 'Participante', align: 'start',value: 'storeType' },
+      { text: 'Criador', align: 'start', value: 'applicantUser.username' },
+      { text: 'Participante', align: 'start',value: 'guestUser.username' },
     ],
   }),
   computed: {},
   methods: {
-    getColor (statusDescription) {
-      if (statusDescription == "Ativa") return 'green'
-      else return 'red'
-    },
     edit: function(itemId) {
       if(this.canEdit) {
         this.$emit('editInfo', itemId);

@@ -3,10 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home';
 import store from './store';
 import NoPower from './views/NoPower.vue';
-import GameList from './views/game/GameList';
-import GameEdit from './views/game/GameEdit';
-import GameCreate from './views/game/GameCreate';
-import GameUploadPdf from './views/game/GameUploadPdf';
+import OneAOneList from './views/oneaone/OneAOneList';
 
 Vue.use(Router);
 
@@ -39,35 +36,12 @@ export default new Router({
       breadcrumbName: 'Home'
     },
     {
-      path: '/game',
-      name: 'game',
-      component: GameList,
+      path: '/oneaone',
+      name: 'oneaone',
+      component: OneAOneList,
       beforeEnter: requireAuth,
       breadcrumbs: [],
-      breadcrumbName: 'Jogos'
-    },
-    {
-      path: '/game/create',
-      name: 'gameCreate',
-      component: GameCreate,
-      beforeEnter: requireAuth,
-      breadcrumbs: ['game'],
-      breadcrumbName: 'Cadastrar Jogo'
-    },
-    {
-      path: '/game/edit/:code',
-      name: 'gameEdit',
-      component: GameEdit,
-      beforeEnter: requireAuth,
-      breadcrumbs: ['game'],
-      breadcrumbName: 'Editar Jogo'
-    },{
-      path: '/game/uploadPdf/:code',
-      name: 'gameUploadPdf',
-      component: GameUploadPdf,
-      beforeEnter: requireAuth,
-      breadcrumbs: ['game'],
-      breadcrumbName: 'Upload de Manual'
+      breadcrumbName: 'OneAOnes'
     }
   ]
 });

@@ -3,7 +3,7 @@
     <v-app-bar-nav-icon @click="() => (drawer = !drawer)"></v-app-bar-nav-icon>
 
     <v-toolbar-title>
-      <span>SHOW MY BOARDGAMES</span>
+      <span>ONE A ONE</span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>

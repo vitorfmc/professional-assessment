@@ -43,7 +43,7 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter{
         http.headers().frameOptions().deny()
                 .and().csrf().disable()
                 .jee().disable()
-                .cors().disable()
+                .cors().and()
                 .formLogin().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

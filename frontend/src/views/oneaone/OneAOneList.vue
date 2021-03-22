@@ -20,11 +20,6 @@
 
       </v-flex>
     </v-layout>
-    <v-layout v-else align-center justify-center>
-      <v-flex xs12 sm8 md4 class="mt-10">
-        Você não tem permissão para ver esse conteúdo.
-      </v-flex>
-    </v-layout>
   </v-container>
 </template>
 
@@ -33,7 +28,7 @@ import { mapActions, mapState } from 'vuex';
 import Breadcrumbs from '@/components/molecules/Breadcrumbs.vue';
 import Card from '@/components/molecules/Card.vue';
 import OneAOneList from '@/components/organisms/oneAOne/OneAOneList.vue';
-import oneAOneApi from '@/api/oneAOne';
+import oneAOneApi from '@/api/oneAOneApi';
 export default {
   name: 'OneAOneList',
   components: {
