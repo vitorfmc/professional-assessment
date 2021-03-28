@@ -7,10 +7,8 @@ export default {
   async login(loginS, passwordS) {
     try {
       let response = await axios.post(
-        process.env.VUE_APP_LOGIN_URL, 
-        JSON.stringify({
-            grant_type: 'client_credentials'
-        }),
+        `${process.env.VUE_APP_LOGIN_URL}?grant_type=client_credentials`,
+        {},
         {
           timeout: process.env.VUE_APP_LOGIN_TIMEOUT,
           headers: {
