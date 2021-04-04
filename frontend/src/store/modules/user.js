@@ -29,20 +29,26 @@ const getters = {};
 
 // actions
 const actions = {
-  async loadUser({ commit }, currentUser) {
+  async loadUser({ commit }, token) {
+    localStorage.removeItem('ACCESS_TOKEN');
 
-    commit('setLoggedUser', null);
+    const userMe = await userApi.login(token);
+    localStorage.setItem('ACCESS_TOKEN', token);
 
-    let userResponse = null;
+    commit('setLoggedUser', userMe);
+  },
+  async loadLocalUser({ commit }) {
+    console.log('loadLocalUser')
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    if (!token) {
+      commit('setLoggedUser', null);
+      return;
+    }
 
-    userResponse = await userApi.login(
-      currentUser.username,
-      currentUser.password
-    )
-
-    commit('setLoggedUser', userResponse);
+    actions.loadUser({ commit }, token);
   },
   async logoutUser({ commit }) {
+    localStorage.removeItem('ACCESS_TOKEN');
     commit('setLoggedUser', null);
   }
 };

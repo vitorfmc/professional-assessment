@@ -19,7 +19,7 @@ import java.util.Collections;
 public class CorsConfig {
     private static final Logger LOGGER = LogManager.getLogger(CorsConfig.class);
 
-    @Value("${aplication.front-end-url}")
+    @Value("${app.front-end-url}")
     private String frontUrl;
 
     @Bean

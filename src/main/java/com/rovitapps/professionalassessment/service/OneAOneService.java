@@ -36,8 +36,8 @@ public class OneAOneService {
     public OneAOne create(String creatorUsername, String evaluatedUsername, String assessmentTemplateId, Date oneAOneDate)
             throws DataValidationException {
 
-        var applicantUser = userService.findByUserName(creatorUsername);
-        var guestUser = userService.findByUserName(evaluatedUsername);
+        var applicantUser = userService.findByUserName(creatorUsername).orElseThrow();
+        var guestUser = userService.findByUserName(evaluatedUsername).orElseThrow();
         var assessmentTemplate = assessmentTemplateService.findById(assessmentTemplateId);
 
         List<Concept> concepts = new ArrayList<>();

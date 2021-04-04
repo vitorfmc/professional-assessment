@@ -55,14 +55,15 @@ export default {
   },
 
   props: {
-    value: Boolean
+    value: Boolean,
+    items: {
+      type: Array,
+      default: () => [], // ex: [{ title: 'Jogos', to: '/game', icon: 'mdi-store', role: 'ROLE_GAME_READ' }]
+      required: true
+    }
   },
 
-  data: () => ({
-    items: [
-      { title: 'Jogos', to: '/game', icon: 'mdi-store', role: 'ROLE_GAME_READ' },
-    ]
-  }),
+  data: () => ({}),
 
   computed: {
     ...mapState('user', ['loggedUser']),

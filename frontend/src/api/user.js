@@ -1,33 +1,38 @@
 import axios from 'axios';
 
+class UserMeResponse {
+  constructor(userData, token) {
+    this.id = userData.id;
+    this.name = userData.name;
+    this.username = userData.username;
+    this.roles = userData.roles.map(role => role.name);
+    this.imageUrl = userData.imageUrl;
+    this.token = token;
+  }
+
+  hasRole(role) {
+    // return true;
+    return this.roles.indexOf(role) >= 0;
+  }
+}
+
 export default {
   /**
-   * @returns {Promise<User>}
+   * @returns {Promise<UserMeResponse>}
    */
-  async login(loginS, passwordS) {
+  async login(token) {
     try {
-      let response = await axios.post(
-        `${process.env.VUE_APP_LOGIN_URL}?grant_type=client_credentials`,
-        {},
+      let response = await axios.get(
+        `http://localhost:8080/api/v1/user/me`, // TODO tirar url daqui
         {
           timeout: process.env.VUE_APP_LOGIN_TIMEOUT,
           headers: {
-            'Access-Control-Allow-Origin': '*',
-            'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
-          },
-          auth: {
-            username: loginS,
-            password: passwordS
+            Authorization: `Bearer ${token}`
           }
         }
       );
 
-      return {
-        login: loginS,
-        roles: [response.data.scope],
-        token: response.data.access_token
-      };
-      
+      return new UserMeResponse(response.data, token);
     } catch (error) {
       throw error;
     }

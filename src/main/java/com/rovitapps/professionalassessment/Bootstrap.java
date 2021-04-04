@@ -41,8 +41,8 @@ public class Bootstrap implements ApplicationRunner {
             createGradeTypes();
             createAssessmentTemplates();
 
-            createUser("user1", "User 1", "y@y.com");
-            createUser("user2", "User 1", "x@x.com");
+//            createUser("user1", "User 1", "y@y.com");
+//            createUser("user2", "User 1", "x@x.com");
 
         }catch (Exception e){
             LOGGER.error("[Bootstrap.run] Error: " + e.getMessage(), e);
@@ -51,24 +51,25 @@ public class Bootstrap implements ApplicationRunner {
         LOGGER.info("[Bootstrap.run] Info: End!");
     }
 
-    private void createUser(String username, String name, String email){
-        if(userRepository.findByUsername(username) == null){
-            userRepository.save(new User(name, username, email, (new BCryptPasswordEncoder()).encode(username),
-                    Arrays.asList(
-                        new Role("ONEAONE_LIST"),
-                        new Role("ONEAONE_FIND_ONE"),
-                        new Role("ONEAONE_CREATE"),
-                        new Role("ONEAONE_UPDATE"),
-                        new Role("ONEAONE_DELETE"),
-                        new Role("USER_LIST"),
-                        new Role("ASSESSMENT_TEMPLATE_LIST"),
-                        new Role("ASSESSMENT_LIST"),
-                        new Role("ASSESSMENT_FIND_ONE")
-
-            )));
-            LOGGER.info("[Bootstrap.run] Info: User " + name + " created.");
-        }
-    }
+//    private void createUser(String username, String name, String email){
+//        if(userRepository.findByUsername(username) == null){
+//            userRepository.save(new User(name, username, email, (new BCryptPasswordEncoder()).encode(username),
+//                    Arrays.asList(
+//                        new Role("ROLE_USER"),
+//                        new Role("ONEAONE_LIST"),
+//                        new Role("ONEAONE_FIND_ONE"),
+//                        new Role("ONEAONE_CREATE"),
+//                        new Role("ONEAONE_UPDATE"),
+//                        new Role("ONEAONE_DELETE"),
+//                        new Role("USER_LIST"),
+//                        new Role("ASSESSMENT_TEMPLATE_LIST"),
+//                        new Role("ASSESSMENT_LIST"),
+//                        new Role("ASSESSMENT_FIND_ONE")
+//
+//            )));
+//            LOGGER.info("[Bootstrap.run] Info: User " + name + " created.");
+//        }
+//    }
 
     private void createAssessmentTemplates(){
 

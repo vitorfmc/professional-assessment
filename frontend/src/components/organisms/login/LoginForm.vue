@@ -5,36 +5,21 @@
         <v-col cols="12" md="12">
           <span class="red--text caption">{{data.errorMessage}}</span>
         </v-col>
-        <v-col cols="12" md="12">
-          <v-text-field
-            filled
-            class="lowercase"
-            v-model="data.username"
-            label="Usuário"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="12" md="12">
-          <v-text-field
-            filled
-            v-model="data.password"
-            type="password"
-            label="Senha"
-          ></v-text-field>
-        </v-col>
       </v-row>
-
-       <v-row justify="space-between">
+      <v-row justify="space-between">
         <v-col cols="12" md="12">
           <v-btn
             block
-            :loading="loadingLogin"
             color="primary"
-            @click="login">
-            ENTRAR
+            href="http://localhost:8080/oauth2/authorize/github?redirect_uri=http://localhost:8081/oauth2/redirect"
+          >
+            Log in com Github
+            <v-icon right dark>
+              mdi-github
+            </v-icon>
           </v-btn>
         </v-col>
       </v-row>
-
     </v-container>
   </v-form>
 </template>
@@ -91,12 +76,6 @@ export default {
       }
 
       return this.$refs.form.validate();
-    },
-    login() {
-      this.validate();
-      if (this.valid) {
-        this.$emit('login', this.data);
-      }
     }
   }
 };

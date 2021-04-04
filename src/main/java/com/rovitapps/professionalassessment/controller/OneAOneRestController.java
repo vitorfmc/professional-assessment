@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
-@PreAuthorize("#oauth2.hasScope('webservice-read')")
+@PreAuthorize("hasRole('ROLE_USER')")
 @RestController
 @RequestMapping(value = "/api/v1/oneaone")
 @CrossOrigin

@@ -4,10 +4,12 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import com.rovitapps.professionalassessment.model.User;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
 
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
     /*@Query("{$or: [{'title': { $regex: '?0', $options: 'i'}}, " +
             "{'libraryCode': { $regex: '?0', $options: 'i'}}, " +

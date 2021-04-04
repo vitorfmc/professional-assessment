@@ -56,7 +56,18 @@ Essa aplicação visa prover uma forma de acompanhar o crescimento profissional 
 $ gradle bootRun
 ```
 
-### 6. Swagger
+---
+
+### 6. Single-sign on github
+
+A aplicação permite o login de qualquer usuário do github que pertença a organização AmeDigital. 
+Para isso, a organização deve estar com visibilidade publica no profile do usuário.
+
+https://docs.github.com/en/github/setting-up-and-managing-your-github-user-account/publicizing-or-hiding-organization-membership
+
+---
+
+### 7. Swagger
 
 1. UI
 

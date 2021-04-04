@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,13 +23,21 @@ public class User {
     @NotNull(message = "username is mandatory")
     private String username;
 
-    @NotNull(message = "email is mandatory")
+    // email pode ser nulo pq nao vem no github
     private String email;
 
     @NotNull(message = "password is mandatory")
     private String password;
 
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
+
+    @NotNull
+//    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+
+    private String providerId;
+
+    private String imageUrl;
 
     public User(String name, String username, String email, String password, List<Role> roles) {
         this.name = name;

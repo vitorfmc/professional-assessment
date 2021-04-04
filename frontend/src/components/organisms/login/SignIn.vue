@@ -19,7 +19,6 @@
       <LoginForm
             v-model="user"
             :loadingLogin="loadingLogin"
-            @login="login"
           />
     </div>
     <div class="pb-10"></div>
@@ -51,35 +50,9 @@ export default {
     ...mapState('user', ['loggedUser']),
   },
 
-  async mounted() {
-    this.loadLoggedUser();
-  },
-
   methods: {
-    ...mapActions('user', ['loadUser', 'logoutUser']),
-    ...mapMutations('user', ['setLoggedUser']),
+    ...mapActions('user', ['logoutUser']),
 
-    async loadLoggedUser() {
-      if(this.user.username != null){
-        this.isLoading = true;
-        this.dialog = false;
-        await this.loadUser(this.user);
-        this.isLoading = false;
-      }
-    },
-    login: async function() {
-      try{
-        this.loadingLogin = true;
-        await this.loadUser(this.user);
-        this.user.errorMessage = null;
-        this.loadingLogin = false;
-        this.$router.push({ name: 'game' });
-      }catch(e){
-        console.log('error');
-        this.loadingLogin = false;
-        this.user.errorMessage = "Usuário e/ou senha inválido(a)"
-      }
-    },
     logout: async function() {
       try{
         await this.logoutUser();
