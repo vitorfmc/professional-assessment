@@ -2,11 +2,11 @@
   <v-app>
     <template>
       <PageHeader v-model="drawer" />
-      <NavigationDrawer v-model="drawer" :items="this.navigationItems" />
-      
+      <NavigationDrawer v-model="drawer" :items="navigationItems" />
+
       <v-content>
         <Alert />
-        aaa{{navigationItems}}
+        aaa{{ navigationItems }}
         <router-view />
       </v-content>
     </template>
@@ -26,9 +26,7 @@ export default {
 
   data: () => ({
     drawer: true,
-    navigationItems: [
-      { title: 'One a One', to: '/oneaone', icon: 'mdi-store' }
-    ]
+    navigationItems: [{ title: 'One a One', to: '/oneaone', icon: 'mdi-store' }]
   }),
 
   computed: {
@@ -60,5 +58,4 @@ export default {
     ...mapActions('user', ['loadUser', 'loadLocalUser'])
   }
 };
-
 </script>

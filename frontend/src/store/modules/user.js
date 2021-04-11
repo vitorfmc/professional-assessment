@@ -5,7 +5,7 @@ class User {
     this.roles = [];
     this.username = '';
     this.isLogged = false;
-    this.token = null
+    this.token = null;
 
     if (userData) {
       let userDataClone = JSON.parse(JSON.stringify(userData));
@@ -38,7 +38,7 @@ const actions = {
     commit('setLoggedUser', userMe);
   },
   async loadLocalUser({ commit }) {
-    console.log('loadLocalUser')
+    console.log('loadLocalUser');
     const token = localStorage.getItem('ACCESS_TOKEN');
     if (!token) {
       commit('setLoggedUser', null);

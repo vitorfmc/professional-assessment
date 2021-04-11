@@ -11,7 +11,7 @@
       ></v-text-field>
     </v-card-title>
 
-    <v-data-table 
+    <v-data-table
       :headers="headers"
       :items="list"
       :loading="loading"
@@ -19,24 +19,28 @@
       :page.sync="page"
       :items-per-page="itemsPerPage"
       hide-default-footer
+      :search="search"
       @page-count="pageCount = $event"
-      :search="search">
+    >
       <template v-slot:no-data>
-          Nenhum resultado encontrado.
+        Nenhum resultado encontrado.
       </template>
       <template v-slot:no-results>
-          Nenhum resultado encontrado.
+        Nenhum resultado encontrado.
       </template>
       <template v-slot:item.id="{ item }">
         <v-btn text color="primary" @click="edit(item.id)">
           {{ item.id }}
-        </v-btn> 
+        </v-btn>
       </template>
-     
     </v-data-table>
 
     <div class="text-center pt-2">
-      <v-pagination v-model="page" :total-visible="10" :length="pageCount"></v-pagination>
+      <v-pagination
+        v-model="page"
+        :total-visible="10"
+        :length="pageCount"
+      ></v-pagination>
     </div>
   </v-card>
 </template>
@@ -65,13 +69,13 @@ export default {
     headers: [
       { text: 'Id', align: 'start', value: 'id' },
       { text: 'Criador', align: 'start', value: 'applicantUser.username' },
-      { text: 'Participante', align: 'start',value: 'guestUser.username' },
-    ],
+      { text: 'Participante', align: 'start', value: 'guestUser.username' }
+    ]
   }),
   computed: {},
   methods: {
     edit: function(itemId) {
-      if(this.canEdit) {
+      if (this.canEdit) {
         this.$emit('editInfo', itemId);
       }
     }

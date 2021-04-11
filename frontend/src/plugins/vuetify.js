@@ -13,7 +13,7 @@ export default new Vuetify({
     // dark: true,
     themes: {
       light: {
-        primary: "#887c5b",
+        primary: '#887c5b',
         secondary: colors.blue.lighten4,
         'card-grey': colors.grey.lighten3
       }

@@ -1,15 +1,13 @@
 <template>
   <v-container fill-height fluid text-center wrap>
-    <v-row align="center"
-        justify="center">
-        <v-col cols="12" md="10">
-          <h3>Você não tem permissão para ver esse conteúdo.</h3>
-        </v-col>
+    <v-row align="center" justify="center">
+      <v-col cols="12" md="10">
+        <h3>Você não tem permissão para ver esse conteúdo.</h3>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-export default {
-};
+export default {};
 </script>

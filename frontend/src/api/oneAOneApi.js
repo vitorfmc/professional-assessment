@@ -1,7 +1,6 @@
 import axios from 'axios';
 
- export default {
-
+export default {
   /*async save(game, user){
     try {
 
@@ -134,29 +133,25 @@ import axios from 'axios';
 
   async findAll(page, max, user, params) {
     try {
-
-      if(params != null){
-          params.limit = max;
-          params.offset = page;
-      }else{
+      if (params != null) {
+        params.limit = max;
+        params.offset = page;
+      } else {
         params = {
           limit: max,
           offset: page
-        }
+        };
       }
 
-      let response = await axios.get(
-        `${process.env.VUE_APP_ONEAONE_URL}`,
-        {
-          timeout: process.env.VUE_APP_ONEAONE_TIMEOUT,
-          headers: {
-            'Authorization': 'Bearer ' + user.token,
-            'Access-Control-Allow-Origin': '*'
-          },
-          params: params
-        }
-      );
-      
+      let response = await axios.get(`${process.env.VUE_APP_ONEAONE_URL}`, {
+        timeout: process.env.VUE_APP_ONEAONE_TIMEOUT,
+        headers: {
+          Authorization: 'Bearer ' + user.token,
+          'Access-Control-Allow-Origin': '*'
+        },
+        params: params
+      });
+
       return {
         content: response.data.content,
         firstPage: response.data.firstPage,
@@ -166,11 +161,9 @@ import axios from 'axios';
         totalElements: response.data.totalElements,
         totalPages: response.data.totalPages
       };
-
     } catch (error) {
       console.error('Erro ao tentar buscar os oneAOnes', error);
       throw error;
     }
-  },
-
+  }
 };

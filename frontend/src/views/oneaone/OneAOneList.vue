@@ -9,7 +9,8 @@
               <oneAOneList
                 :loading="pageLoading"
                 :list="oneAOneList"
-                @editInfo="editInfo"/>
+                @editInfo="editInfo"
+              />
             </v-col>
           </v-row>
         </Card>
@@ -17,7 +18,6 @@
         <v-btn fab bottom right fixed color="primary" @click="create">
           <v-icon>mdi-plus</v-icon>
         </v-btn>
-
       </v-flex>
     </v-layout>
   </v-container>
@@ -38,13 +38,13 @@ export default {
   },
   data: () => ({
     pageLoading: true,
-    oneAOneList: [],
+    oneAOneList: []
   }),
   computed: {
-    ...mapState('user', ['loggedUser']),
+    ...mapState('user', ['loggedUser'])
   },
   watch: {
-    page: function(val, oldVal) {
+    page: function() {
       this.loadList();
     }
   },
@@ -55,30 +55,31 @@ export default {
     ...mapActions('user', ['logoutUser']),
     loadList: async function() {
       this.pageLoading = true;
-      try{
-        const result = await oneAOneApi.findAll(this.page - 1, this.perPage, this.loggedUser);
+      try {
+        const result = await oneAOneApi.findAll(
+          this.page - 1,
+          this.perPage,
+          this.loggedUser
+        );
         this.oneAOneList = result.content;
-      
-      } catch(e) {
-        try{
+      } catch (e) {
+        try {
           await this.logoutUser();
           this.errorMsg = null;
           this.$router.push({ name: 'home' });
-        
-        }catch(e){
-          this.errorMsg = "Erro ao fazer logout"
+        } catch (e) {
+          this.errorMsg = 'Erro ao fazer logout';
         }
-      
       } finally {
         this.pageLoading = false;
       }
     },
     editInfo: function(code) {
-      this.$router.push({ name: 'oneAOneEdit', params: { id: id } });
+      this.$router.push({ name: 'oneAOneEdit', params: { id: code } });
     },
     create: function() {
       this.$router.push({ name: 'oneAOneCreate' });
-    },
+    }
   }
 };
 </script>

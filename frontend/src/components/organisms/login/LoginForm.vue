@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="12">
-          <span class="red--text caption">{{data.errorMessage}}</span>
+          <span class="red--text caption">{{ data.errorMessage }}</span>
         </v-col>
       </v-row>
       <v-row justify="space-between">
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'LoginForm',
   components: {},
@@ -38,7 +37,7 @@ export default {
     loadingLogin: {
       type: Boolean,
       default: false
-    },
+    }
   },
 
   data() {
@@ -47,14 +46,12 @@ export default {
       data: {
         errorMessage: null,
         username: '',
-        password: null,
-      },
+        password: null
+      }
     };
   },
 
-  computed: {
-    
-  },
+  computed: {},
 
   watch: {
     data: {
@@ -67,12 +64,12 @@ export default {
 
   methods: {
     validate() {
-      if(this.data.username == null || this.data.username == null){
-        this.data.errorMessage = 'Usuário e senha obrigatórios'
-          this.valid = false
-      }else{
+      if (this.data.username == null || this.data.username == null) {
+        this.data.errorMessage = 'Usuário e senha obrigatórios';
+        this.valid = false;
+      } else {
         this.data.errorMessage = null;
-        this.valid = true
+        this.valid = true;
       }
 
       return this.$refs.form.validate();

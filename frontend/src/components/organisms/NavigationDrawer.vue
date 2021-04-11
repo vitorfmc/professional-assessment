@@ -1,13 +1,11 @@
 <template>
   <v-navigation-drawer v-model="drawer" app clipped>
     <v-list dense nav class="py-0">
-
       <v-list-item>
         <v-list-item-content v-if="loggedUser.isLogged">
           <v-list-item-title>{{ loggedUser.username }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-
 
       <template v-for="item in itemsUserCanSee">
         <v-list-item v-if="item.to" :key="item.to" :to="item.to">
@@ -40,7 +38,6 @@
     </v-list>
 
     <SignIn />
-    
   </v-navigation-drawer>
 </template>
 
@@ -101,12 +98,12 @@ export default {
 
   methods: {
     logout: async function() {
-      try{
+      try {
         await this.logoutUser();
         this.$router.push({ name: 'home' });
-      }catch(e){
+      } catch (e) {
         this.loadingLogin = false;
-        this.user.errorMessage = "Erro ao fazer logout"
+        this.user.errorMessage = 'Erro ao fazer logout';
       }
     }
   }

@@ -1,5 +1,10 @@
 <template>
-  <v-app-bar app collapse-on-scroll clipped-left style="background: #887c5b; color: white; font-weight: bold">
+  <v-app-bar
+    app
+    collapse-on-scroll
+    clipped-left
+    style="background: #887c5b; color: white; font-weight: bold"
+  >
     <v-app-bar-nav-icon @click="() => (drawer = !drawer)"></v-app-bar-nav-icon>
 
     <v-toolbar-title>

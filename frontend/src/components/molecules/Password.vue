@@ -6,8 +6,8 @@
     type="password"
     :label="label"
     hint="Pelo menos 8 caracteres"
-    @click:append="fake = !fake"
     readonly
+    @click:append="fake = !fake"
   ></v-text-field>
   <v-text-field
     v-else
@@ -59,7 +59,7 @@ export default {
 
   computed: {
     canFakePassword: function() {
-      return this.fakeBeforeEdit && this.password === "" && !this.show;
+      return this.fakeBeforeEdit && this.password === '' && !this.show;
     },
     appendIcon: function() {
       if (this.canFakePassword) {
@@ -73,7 +73,7 @@ export default {
   watch: {
     password: function(value) {
       this.$emit('input', value);
-      if (value === "") {
+      if (value === '') {
         this.show = false;
       }
     }
@@ -88,7 +88,6 @@ export default {
       }
     }
   }
-
 };
 </script>
 

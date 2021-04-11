@@ -91,10 +91,10 @@ export default {
 <style lang="scss" scoped>
 /////////////////// new layout
 .search-card-enter-active {
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .search-card-leave-active {
-  transition: all .8s;
+  transition: all 0.8s;
 }
 .search-card-enter, .search-card-leave-to
 /* .slide-fade-leave-active em versões anteriores a 2.1.8 */ {
