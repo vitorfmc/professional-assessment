@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer v-model="drawer" app clipped>
-    <Avatar v-if="loggedUser.isLogged" :user="loggedUser" />
+    <Avatar />
 
     <v-list dense nav>
       <template v-for="item in itemsUserCanSee">
@@ -32,20 +32,16 @@
         </v-list-group>
       </template>
     </v-list>
-
-    <SignIn />
   </v-navigation-drawer>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 
-import SignIn from './login/SignIn';
 import Avatar from './Avatar';
 
 export default {
   components: {
-    SignIn,
     Avatar
   },
 
@@ -58,10 +54,9 @@ export default {
     }
   },
 
-  data: () => ({}),
-
   computed: {
     ...mapState('user', ['loggedUser']),
+
     itemsUserCanSee: function() {
       let newItems = [];
 
@@ -88,20 +83,6 @@ export default {
       },
       set: function(value) {
         this.$emit('input', value);
-      }
-    }
-  },
-
-  watch: {},
-
-  methods: {
-    logout: async function() {
-      try {
-        await this.logoutUser();
-        this.$router.push({ name: 'home' });
-      } catch (e) {
-        this.loadingLogin = false;
-        this.user.errorMessage = 'Erro ao fazer logout';
       }
     }
   }

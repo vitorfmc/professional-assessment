@@ -6,8 +6,6 @@
 
       <v-content>
         <Alert />
-        aaa{{ navigationItems }}
-        {{ loggedUser }}
         <router-view />
       </v-content>
     </template>
@@ -43,25 +41,17 @@ export default {
   },
 
   created: async function() {
-    console.log('aaaaaaaaaaaaaaaaa');
     await this.loadLocalUser();
-    console.log(this.loggedUser);
 
     if (this.loggedUser && this.loggedUser.isLogged) {
       return;
     }
 
-    console.log('bbbbbbbbbbbbbbbb');
     if ('/oauth2/redirect' === this.$router.currentRoute.path) {
-      console.log('cccccccccccccccc');
       const token = this.$router.currentRoute.query.token;
-      console.log(token);
       await this.loadUser(token);
-      console.log('ddddddddddddddddd');
       this.$router.push({ name: 'home' });
     }
-
-    console.log(this.loggedUser);
   },
 
   methods: {
