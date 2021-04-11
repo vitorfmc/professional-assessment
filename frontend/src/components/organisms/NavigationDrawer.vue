@@ -1,12 +1,8 @@
 <template>
   <v-navigation-drawer v-model="drawer" app clipped>
-    <v-list dense nav class="py-0">
-      <v-list-item>
-        <v-list-item-content v-if="loggedUser.isLogged">
-          <v-list-item-title>{{ loggedUser.username }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+    <Avatar v-if="loggedUser.isLogged" :user="loggedUser" />
 
+    <v-list dense nav>
       <template v-for="item in itemsUserCanSee">
         <v-list-item v-if="item.to" :key="item.to" :to="item.to">
           <v-list-item-icon>
@@ -45,10 +41,12 @@
 import { mapState } from 'vuex';
 
 import SignIn from './login/SignIn';
+import Avatar from './Avatar';
 
 export default {
   components: {
-    SignIn
+    SignIn,
+    Avatar
   },
 
   props: {

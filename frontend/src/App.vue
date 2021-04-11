@@ -7,6 +7,7 @@
       <v-content>
         <Alert />
         aaa{{ navigationItems }}
+        {{ loggedUser }}
         <router-view />
       </v-content>
     </template>
@@ -26,7 +27,15 @@ export default {
 
   data: () => ({
     drawer: true,
-    navigationItems: [{ title: 'One a One', to: '/oneaone', icon: 'mdi-store' }]
+    navigationItems: [
+      { title: 'Home', to: '/', icon: 'mdi-home' },
+      {
+        title: 'One a One',
+        to: '/oneaone',
+        icon: 'mdi-store',
+        role: 'ROLE_USER'
+      }
+    ]
   }),
 
   computed: {
@@ -49,6 +58,7 @@ export default {
       console.log(token);
       await this.loadUser(token);
       console.log('ddddddddddddddddd');
+      this.$router.push({ name: 'home' });
     }
 
     console.log(this.loggedUser);
